@@ -64,7 +64,7 @@
             >
               <div
                 class="formData">
-                <label for="first">Prénom</label><br>
+                <label for="first" required>Prénom</label><br>
                 <input
                   class="text-control"
                   type="text"
@@ -75,17 +75,18 @@
               </div>
               <div
                 class="formData">
-                <label for="last">Nom</label><br>
+                <label for="last" required>Nom</label><br>
                 <input
                   class="text-control"
                   type="text"
                   id="last"
                   name="last"
+                  minlength="2"
                 /><br>
               </div>
               <div
                 class="formData">
-                <label for="email">E-mail</label><br>
+                <label for="email" >E-mail</label><br>
                 <input
                   class="text-control"
                   type="email"
