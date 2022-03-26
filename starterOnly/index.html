@@ -73,10 +73,10 @@
                   name="first"
                   minlength="2"
                   required
-
                 />
                 <br>
               </div>
+              <div id="data-first"></div>
               <div
                 class="formData">
                 <label for="last">Nom</label><br>
@@ -85,22 +85,25 @@
                   type="text"
                   id="last"
                   name="last"
-                  minlength="2"
+                  minlength="2"         
                   required
                 />
                 <br>
               </div>
+              <div id="data-last"></div>
               <div
                 class="formData">
                 <label for="email">E-mail</label><br>
                 <input
                   class="text-control"
                   type="email"
+                  pattern = "[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}"
                   id="email"
                   name="email"
                   required
                 /><br>
               </div>
+              <div id="data-email"></div>
               <div
                 class="formData">
                 <label for="birthdate">Date de naissance</label><br>
@@ -112,6 +115,7 @@
                   required
                 /><br>
               </div>
+              <div id="data-birthdate"></div>
               <div
                 class="formData">
                 <label for="quantity">À combien de tournois GameOn avez-vous déjà participé ?</label><br>
@@ -125,6 +129,7 @@
                   required
                   >
               </div>
+              <div id="data-quantity"></div>
               <p class="text-label">A quel tournoi souhaitez-vous participer cette année ?</p>
               <div
                 class="formData">
@@ -196,6 +201,7 @@
                   Portland</label
                 >
               </div>
+              <div id="data-location"></div>
 
               <div
                 class="formData">
@@ -204,12 +210,14 @@
                   type="checkbox"
                   id="checkbox1"
                   required
+
                 />
                 <label class="checkbox2-label" for="checkbox1" >
                   <span class="checkbox-icon"></span>
                   J'ai lu et accepté les conditions d'utilisation.
                 </label>
                 <br>
+                <div id="data-checkbox1"></div>
                 <input 
                   class="checkbox-input"
                   type="checkbox"
@@ -220,6 +228,7 @@
                   Je souhaite être prévenu des prochains évènements.
                 </label>
                 <br>
+                <div id="data-checkbox2"></div>
               </div>
               <input
                 class="button"

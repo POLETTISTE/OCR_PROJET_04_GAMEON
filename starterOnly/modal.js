@@ -12,22 +12,44 @@ const modalbg = document.querySelector(".bground");
 const modalBtn = document.querySelectorAll(".modal-btn");
 const modalClose = document.querySelectorAll(".close");
 const formValidate = document.querySelectorAll(".btn-submit");
-const firstNameInput = document.getElementById("first");
-const lastNameInput = document.getElementById("last");
-const emailInput = document.getElementById("email");
-const birthDateInput = document.getElementById("birthdate");
-const quantityInput = document.getElementById("quantity");
-const location1Input = document.getElementById("location1");
-const location2Input = document.getElementById("location2");
-const location3Input = document.getElementById("location3");
-const location4Input = document.getElementById("location4");
-const location5Input = document.getElementById("location5");
-const location6Input = document.getElementById("location6");
+
+const firstName = document.getElementById("first");
+const lastName = document.getElementById("last");
+const email = document.getElementById("email");
+const birthDate = document.getElementById("birthdate");
+const quantity = document.getElementById("quantity");
+const location1 = document.getElementById("location1");
+const location2 = document.getElementById("location2");
+const location3 = document.getElementById("location3");
+const location4 = document.getElementById("location4");
+const location5 = document.getElementById("location5");
+const location6 = document.getElementById("location6");
 const checkbox1 = document.getElementById("checkbox1");
 const checkbox2 = document.getElementById("checkbox2");
 
+//ERRORS
+const firstNameError = document.getElementById("data-first");
+const lastNameError = document.getElementById("data-last");
+const emailError = document.getElementById("data-email");
+const birthDateError = document.getElementById("data-birthdate");
+const quantityError = document.getElementById("data-quantity");
+const locationError = document.querySelectorAll('input[value][type="radio"]');
+const checkboxError = document.getElementById('checkbox1');
 
-// launch modal event
+//VALIDITY
+let firstNameValidity = "false";
+let lastNameValidity = "false";
+let emailValidity = "false";
+let birthDateValidity = "false";
+let quantityValidity = "false";
+let locationValidity = "false";
+let checkboxvalidity = "false";
+
+//REGEX
+const emailRegex = /[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}/;
+const birthDateRegex = /^[0-9]{4}\-(0[1-9]|1[012])\-(0[1-9]|[12][0-9]|3[01])/;
+
+// LAUNCH MODAL EVENTS
 modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
 modalClose.forEach((span) => span.addEventListener("click", closeModal));
 formValidate.forEach((btn) => btn.addEventListener("click", validate));
@@ -40,17 +62,17 @@ function launchModal() {
 
 //clear fields
 function resetFields() {
-  firstNameInput.value = "";
-  lastNameInput.value = "";
-  emailInput.value = "";
-  birthDateInput.value = "";
-  quantityInput.value = "";
-  location1Input.checked = true;
-  location2Input.checked = false;
-  location3Input.checked = false;
-  location4Input.checked = false;
-  location5Input.checked = false;
-  location6Input.checked = false;
+  firstName.value = "";
+  lastName.value = "";
+  email.value = "";
+  birthDate.value = "";
+  quantity.value = "";
+  location1.checked = true;
+  location2.checked = false;
+  location3.checked = false;
+  location4.checked = false;
+  location5.checked = false;
+  location6.checked = false;
   checkbox1.checked = false;
   checkbox2.checked = false;
 };
@@ -62,40 +84,119 @@ function closeModal() {
 };
 
 
-
-// form validate
+// form validate si tous les champs sont valides alors ca submit sinon ca reste
 function validate() {
+  // si toutes les conditions de validity sont true alors enable btn sinon disable
 alert('formulaire valide');
 }
 
-
 // firstName Validation
-firstNameInput.addEventListener("change", function () {
-  first = firstNameInput;
-  first.setCustomValidity;
-  if (first.value.length < 1) {
-    first.insertAdjacentHTML('afterend', '<p>champ requis</p>');
+firstName.addEventListener('change', function(e) {
+  let value = e.target.value;
+  if (value===""){
+    let message = "champ obligatoire";
+    this.classList.add('invalid');
+    this.classList.remove('valid');
+    firstNameError.innerText = message;
+    firstNameValidity = 'false';
   }
-    else if(first.value.length < 2) {
-      first.insertAdjacentHTML('afterend', '<p>champs de moins de 2 caractères !</p>');
-    
-    }else{
-      first.Innerhtml = "<p>CHAMP VALIDE</p>"
-  console.log('le champ firstName est valide !');
+  else if (value.length < 2) {
+    let message = "Veuillez entrer 2 caractères ou plus pour le champ du prénom";
+    this.classList.add('invalid');
+    this.classList.remove('valid');
+    firstNameError.innerText = message;
+    firstNameValidity = 'false';
+
+  } else {
+    let message = "";
+    this.classList.remove('invalid');
+    this.classList.add('valid');
+    firstNameError.innerText = message;
+    firstNameValidity = 'true';
   }
 });
 
+
 // lastname validation
+lastName.addEventListener('change', function(e) {
+  let value = e.target.value;
+  if (value===""){
+    let message = "champ obligatoire";
+    this.classList.add('invalid');
+    this.classList.remove('valid');
+    lastNameError.innerText = message;
+    lastNameValidity = 'false';
+
+  }
+  else if (value.length < 2) {
+    let message = "Veuillez entrer 2 caractères ou plus pour le champ du prénom";
+    this.classList.add('invalid');
+    this.classList.remove('valid');
+    lastNameError.innerText = message;
+    lastNameValidity = 'false';
+
+  } else {
+    let message = "";
+    this.classList.remove('invalid');
+    this.classList.add('valid');
+    lastNameError.innerText = message;
+    lastNameValidity = 'true';
+  }
+});
 
 
-//email valid ?
-emailInput.addEventListener("change", function(e) {
-  if (/^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/.test(e.value)) {
-    alert("valid email address!");
-    return (true);
-
+//  email validation
+email.addEventListener('change', function(e) {
+  let value = e.target.value;
+  let message=""
+  if (value===""){
+    message = "champ obligatoire";
+    emailValidity = 'false';
+    this.classList.add('invalid');
+    this.classList.remove('valid');
+    emailError.innerText = message;
+  }
+  else if (emailRegex.test(value)) {
+    message = "";
+    emailValidity = 'true';
+    this.classList.add('valid');
+    this.classList.remove('invalid');
+    emailError.innerText = message;
   }else{
-    alert("You have entered an invalid email address!")
-    return (false);
+    message = "mauvais format de mail";
+    emailValidity = 'false';
+    this.classList.add('invalid');
+    this.classList.remove('valid');
+    emailError.innerText = message;
   }
 })
+
+
+//  birthdate validation
+birthDate.addEventListener('change', function(e) {
+  let value = e.target.value;
+  let message="";
+  if (value===""){
+    birthDateValidity = 'false';
+    message = "champ obligatoire";
+    this.classList.add('invalid');
+    this.classList.remove('valid');
+    birthNameError.innerText = message;
+  }
+  else if (birthDateRegex.test(value)) {
+    birthDateValidity = 'true';
+    // message="VALIDE"
+    this.classList.add('valid');
+    this.classList.remove('invalid');
+    birthDateError.innerText = message;
+  }else{
+    birthDateValidity = 'false';
+    message="NON VALIDE";
+    this.classList.add('invalid');
+    this.classList.remove('valid');
+    birthDateError.innerText = message;
+  }
+});
+
+// quantity validation NAN
+
