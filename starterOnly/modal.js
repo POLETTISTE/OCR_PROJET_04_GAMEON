@@ -12,7 +12,7 @@ const modalbg = document.querySelector(".bground");
 const modalBtn = document.querySelectorAll(".modal-btn");
 const modalClose = document.querySelectorAll(".close");
 const formValidate = document.querySelectorAll(".btn-submit");
-
+const radioChecked = document.querySelectorAll('input[name=location]');
 const firstName = document.getElementById("first");
 const lastName = document.getElementById("last");
 const email = document.getElementById("email");
@@ -33,17 +33,17 @@ const lastNameError = document.getElementById("data-last");
 const emailError = document.getElementById("data-email");
 const birthDateError = document.getElementById("data-birthdate");
 const quantityError = document.getElementById("data-quantity");
-const locationError = document.querySelectorAll('input[value][type="radio"]');
-const checkboxError = document.getElementById('checkbox1');
+const locationError = document.getElementById("data-location");
+const checkboxError = document.getElementById('data-checkbox1');
 
 //VALIDITY
-let firstNameValidity = "false";
-let lastNameValidity = "false";
-let emailValidity = "false";
-let birthDateValidity = "false";
-let quantityValidity = "false";
-let locationValidity = "false";
-let checkboxvalidity = "false";
+let firstNameValidity = false;
+let lastNameValidity = false;
+let emailValidity = false;
+let birthDateValidity = false;
+let quantityValidity = false;
+let locationValidity = false;
+let checkboxvalidity = false;
 
 //REGEX
 const emailRegex = /[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}/;
@@ -86,8 +86,11 @@ function closeModal() {
 
 // form validate si tous les champs sont valides alors ca submit sinon ca reste
 function validate() {
-  // si toutes les conditions de validity sont true alors enable btn sinon disable
-alert('formulaire valide');
+  if((firstNameValidity && lastNameValidity && emailValidity && birthDateValidity && locationValidity && checkboxvalidity)) {
+    alert('FORMULAIRE VALIDE');
+  }else{
+    alert('FORMULAIRE NON VALIDE');
+  }
 }
 
 // firstName Validation
@@ -185,7 +188,6 @@ birthDate.addEventListener('change', function(e) {
   }
   else if (birthDateRegex.test(value)) {
     birthDateValidity = 'true';
-    // message="VALIDE"
     this.classList.add('valid');
     this.classList.remove('invalid');
     birthDateError.innerText = message;
@@ -199,4 +201,66 @@ birthDate.addEventListener('change', function(e) {
 });
 
 // quantity validation NAN
+quantity.addEventListener('change', function(e) {
+  let value = e.target.value;
+  let message="";
+  if (value===""){
+    quantityValidity = 'false';
+    message = "champ obligatoire";
+    this.classList.add('invalid');
+    this.classList.remove('valid');
+    quantityError.innerText = message;
+  }
+  else if (value.isNan) {
+    quantityValidity = 'false';
+    message="ce n'est pas un nombre"
+    this.classList.add('invalid');
+    this.classList.remove('valid');
+    quantityError.innerText = message;
+  }else{
+    quantityValidity = 'true';
+    message=" ";
+    this.classList.add('valid');
+    this.classList.remove('invalid');
+    quantityError.innerText = message;
+  }
+});
 
+
+// RadiocheckedValidity
+// radioChecked.addEventListener('change', function(e) {
+//   // CHERCHER PARMI TOUS LES BOUTONS SI AU MOINS UN EST COCHE ? EACH ?
+//   let message="";
+//   let checked = e.target.checked;
+//    if (checked == true) {
+//      message = 'TRUE';
+//      this.classList.add('valid');
+//      this.classList.remove('invalid');
+//      locationError.innerText = message;
+
+//    }else{
+//     message = 'FALSE';  
+//     this.classList.add('invalid');
+//     this.classList.remove('valid');
+//     locationError.innerText = message;
+//   }
+// });
+
+//conditions utilisation
+checkbox1.addEventListener('change', function(e) {
+  let checked = e.target.checked;
+  if (checked) {
+    message = '';
+    this.classList.add('valid');
+    this.classList.remove('invalid');
+    checkboxError.innerText = message;
+    checkboxvalidity = true;
+
+  }else{
+   message = "Vous devez accepter les conditions d'utilisation";  
+   this.classList.add('invalid');
+   this.classList.remove('valid');
+   checkboxError.innerText = message;
+   checkboxvalidity = false;
+ }
+});
