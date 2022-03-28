@@ -101,21 +101,21 @@ firstName.addEventListener('change', function(e) {
     this.classList.add('invalid');
     this.classList.remove('valid');
     firstNameError.innerText = message;
-    firstNameValidity = 'false';
+    firstNameValidity = false;
   }
   else if (value.length < 2) {
     let message = "Veuillez entrer 2 caractères ou plus pour le champ du prénom";
     this.classList.add('invalid');
     this.classList.remove('valid');
     firstNameError.innerText = message;
-    firstNameValidity = 'false';
+    firstNameValidity = false;
 
   } else {
     let message = "";
     this.classList.remove('invalid');
     this.classList.add('valid');
     firstNameError.innerText = message;
-    firstNameValidity = 'true';
+    firstNameValidity = true;
   }
 });
 
@@ -128,7 +128,7 @@ lastName.addEventListener('change', function(e) {
     this.classList.add('invalid');
     this.classList.remove('valid');
     lastNameError.innerText = message;
-    lastNameValidity = 'false';
+    lastNameValidity = false;
 
   }
   else if (value.length < 2) {
@@ -136,14 +136,14 @@ lastName.addEventListener('change', function(e) {
     this.classList.add('invalid');
     this.classList.remove('valid');
     lastNameError.innerText = message;
-    lastNameValidity = 'false';
+    lastNameValidity = false;
 
   } else {
     let message = "";
     this.classList.remove('invalid');
     this.classList.add('valid');
     lastNameError.innerText = message;
-    lastNameValidity = 'true';
+    lastNameValidity = true;
   }
 });
 
@@ -154,20 +154,20 @@ email.addEventListener('change', function(e) {
   let message=""
   if (value===""){
     message = "champ obligatoire";
-    emailValidity = 'false';
+    emailValidity = false;
     this.classList.add('invalid');
     this.classList.remove('valid');
     emailError.innerText = message;
   }
   else if (emailRegex.test(value)) {
     message = "";
-    emailValidity = 'true';
+    emailValidity = true;
     this.classList.add('valid');
     this.classList.remove('invalid');
     emailError.innerText = message;
   }else{
     message = "mauvais format de mail";
-    emailValidity = 'false';
+    emailValidity = false;
     this.classList.add('invalid');
     this.classList.remove('valid');
     emailError.innerText = message;
@@ -180,19 +180,19 @@ birthDate.addEventListener('change', function(e) {
   let value = e.target.value;
   let message="";
   if (value===""){
-    birthDateValidity = 'false';
+    birthDateValidity = false;
     message = "champ obligatoire";
     this.classList.add('invalid');
     this.classList.remove('valid');
     birthNameError.innerText = message;
   }
   else if (birthDateRegex.test(value)) {
-    birthDateValidity = 'true';
+    birthDateValidity = true;
     this.classList.add('valid');
     this.classList.remove('invalid');
     birthDateError.innerText = message;
   }else{
-    birthDateValidity = 'false';
+    birthDateValidity = false;
     message="NON VALIDE";
     this.classList.add('invalid');
     this.classList.remove('valid');
@@ -205,20 +205,20 @@ quantity.addEventListener('change', function(e) {
   let value = e.target.value;
   let message="";
   if (value===""){
-    quantityValidity = 'false';
+    quantityValidity = false;
     message = "champ obligatoire";
     this.classList.add('invalid');
     this.classList.remove('valid');
     quantityError.innerText = message;
   }
   else if (value.isNan) {
-    quantityValidity = 'false';
+    quantityValidity = false;
     message="ce n'est pas un nombre"
     this.classList.add('invalid');
     this.classList.remove('valid');
     quantityError.innerText = message;
   }else{
-    quantityValidity = 'true';
+    quantityValidity = true;
     message=" ";
     this.classList.add('valid');
     this.classList.remove('invalid');
