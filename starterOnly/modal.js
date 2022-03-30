@@ -10,6 +10,7 @@ function editNav() {
 // DOM Elements
 const modalbg = document.querySelector(".bground");
 const modalBtn = document.querySelectorAll(".modal-btn");
+const confirm = document.querySelector(".confirm");
 const modalClose = document.querySelectorAll(".close");
 const formValidate = document.querySelectorAll(".btn-submit");
 const firstName = document.getElementById("first");
@@ -231,10 +232,6 @@ function cguValidity() {
 // on enleve la validation de locationValidity
 function validate() {
   if(firstNameValidity() && lastNameValidity() && emailValidity() && birthDateValidity()  && cguValidity()) {
-      resetFields();
-    alert('FORMULAIRE VALIDE');
-
-  }else{
-    alert('FORMULAIRE NON VALIDE');
+      resetFields();   
   }
 }

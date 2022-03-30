@@ -73,6 +73,9 @@
                   name="first"
                   minlength="2"
                   required
+                  oninvalid="this.setCustomValidity(' ')"
+                  oninput="this.setCustomValidity('')" 
+
                 />
                 <br>
               </div>
@@ -87,6 +90,9 @@
                   name="last"
                   minlength="2"         
                   required
+                  oninvalid="this.setCustomValidity(' ')"
+                  oninput="this.setCustomValidity('')" 
+
                 />
                 <br>
               </div>
@@ -101,6 +107,9 @@
                   id="email"
                   name="email"
                   required
+                  oninvalid="this.setCustomValidity(' ')"
+                  oninput="this.setCustomValidity('')" 
+
                 /><br>
               </div>
               <div id="data-email"></div>
@@ -113,6 +122,9 @@
                   id="birthdate"
                   name="birthdate"
                   required
+                  oninvalid="this.setCustomValidity(' ')"
+                  oninput="this.setCustomValidity('')"  
+
                 /><br>
               </div>
               <div id="data-birthdate"></div>
@@ -127,6 +139,9 @@
                   min="0" 
                   max="99"
                   required
+                  oninvalid="this.setCustomValidity(' ')"
+                  oninput="this.setCustomValidity('')" 
+
                   >
               </div>
               <div id="data-quantity"></div>
@@ -140,6 +155,9 @@
                   name="location"
                   value="New York"
                   checked="checked"
+                  oninvalid="this.setCustomValidity(' ')"
+                  oninput="this.setCustomValidity('')" 
+
                 />
                 <label class="checkbox-label" for="location1">
                   <span class="checkbox-icon"></span>
@@ -210,6 +228,9 @@
                   type="checkbox"
                   id="checkbox1"
                   required
+                  oninvalid="this.setCustomValidity(' ')"
+                  oninput="this.setCustomValidity('')" 
+
 
                 />
                 <label class="checkbox2-label" for="checkbox1" >
@@ -240,6 +261,7 @@
           </div>
         </div>
       </div>
+
     </main>
     <footer>
       <p class="copyrights">
