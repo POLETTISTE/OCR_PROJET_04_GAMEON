@@ -56,12 +56,20 @@
         <div class="content">
           <span class="close"></span>
           <div class="modal-body">
+            <div id="thanks">
+              <span>Merci pour votre inscription</span>
+              <input
+                class="button btn-close"
+                type="submit"
+                value="Fermer"
+              />
+            </div>
             <form
               method="get"
               action="index.html"
               id="reserve"
               name="reserve"
-              onsubmit="validate();"
+              onsubmit="validate(e);"
             >
               <div
                 class="formData">
@@ -252,8 +260,7 @@
                 <div id="data-checkbox2"></div>
               </div>
               <input
-                class="button"
-                class="btn-submit"
+                class="button btn-submit"
                 type="submit"
                 value="C'est parti"
               />

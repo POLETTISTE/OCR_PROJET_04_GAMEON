@@ -10,8 +10,11 @@ function editNav() {
 // DOM Elements
 const modalbg = document.querySelector(".bground");
 const modalBtn = document.querySelectorAll(".modal-btn");
+const reserve = document.getElementById("reserve");
+const thanks = document.getElementById("thanks");
 const confirm = document.querySelector(".confirm");
 const modalClose = document.querySelectorAll(".close");
+const btnClose = document.querySelectorAll(".btn-close");
 const formValidate = document.querySelectorAll(".btn-submit");
 const firstName = document.getElementById("first");
 const lastName = document.getElementById("last");
@@ -38,12 +41,20 @@ const birthDateRegex = /^[0-9]{4}\-(0[1-9]|1[012])\-(0[1-9]|[12][0-9]|3[01])/;
 // LAUNCH MODAL EVENTS
 modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
 modalClose.forEach((span) => span.addEventListener("click", closeModal));
+btnClose.forEach((span) => span.addEventListener("click", closeBtn));
 formValidate.forEach((btn) => btn.addEventListener("click", validate));
 
 
 // launch modal form
 function launchModal() {
   modalbg.style.display = "block";
+  thanks.style.display = "none";
+};
+
+// launch thanks message
+function launchThanksMessage() {
+  reserve.style.display = "none";
+  thanks.style.display = "block";
 };
 
 //clear fields
@@ -68,6 +79,12 @@ function closeModal() {
   modalbg.style.display = "none";
 };
 
+// close thanks message
+function closeBtn() {
+  modalbg.style.display = "none";
+
+}
+
 
 // firstName Validation
 
@@ -78,7 +95,7 @@ function firstNameValidity() {
   let target = document.getElementById('first');
   let value = target.value;
   if (value==="" || value.length < 2){
-    message = value === "" ? "champ obligatoire" : "Veuillez entrer 2 caractères ou plus pour le champ du prénom";
+    message = value === "" ? 'champ obligatoire' : 'Veuillez entrer 2 caractères ou plus pour le champ du prénom';
     target.classList.add('invalid');
     target.classList.remove('valid');
     firstNameError.innerText = message;
@@ -99,7 +116,7 @@ function lastNameValidity() {
   let target = document.getElementById('last');
   let value = target.value;
   if (value==="" || value.length < 2){
-    message = value === "" ? "champ obligatoire" : "Veuillez entrer 2 caractères ou plus pour le champ du prénom";
+    message = value === "" ? 'champ obligatoire' : 'Veuillez entrer 2 caractères ou plus pour le champ du prénom';
     target.classList.add('invalid');
     target.classList.remove('valid');
     lastNameError.innerText = message;
@@ -121,7 +138,7 @@ function emailValidity() {
   let target = document.getElementById('email');
   let value = target.value;
   if (value==="" || !(emailRegex.test(value))){
-    message = value === "" ? "champ obligatoire" : " mauvais format de mail";
+    message = value === "" ? 'champ obligatoire' : 'mauvais format de mail';
     target.classList.add('invalid');
     target.classList.remove('valid');
     emailError.innerText = message;
@@ -143,7 +160,7 @@ function birthDateValidity() {
   let target = document.getElementById('birthdate');
   let value = target.value;
   if (value==="" || !(birthDateRegex.test(value))){
-    message = value === "" ? "champ obligatoire" : " mauvais format de date";
+    message = value === "" ? 'champ obligatoire' : 'Vous devez entrer votre date de naissance.';
     target.classList.add('invalid');
     target.classList.remove('valid');
     birthDateError.innerText = message;
@@ -196,7 +213,7 @@ locations.forEach((location) => {
     if (!checked) {
       this.classList.add('invalid');
       this.classList.remove('valid');
-      locationError.innerText = 'Veuillez cocher une ville';
+      locationError.innerText = 'Vous devez choisir une ville';
 
     }
     return checked;
@@ -220,7 +237,7 @@ function cguValidity() {
     checked=false;
     target.classList.add('invalid');
     target.classList.remove('valid');
-    cguError.innerText = 'Vous devez accepter les conditions';
+    cguError.innerText = 'Vous devez vérifier que vous acceptez les termes et conditions.';
   }
   return checked;
 }
@@ -230,8 +247,10 @@ function cguValidity() {
 // form validate si tous les champs sont valides alors ca submit sinon ca reste
 
 // on enleve la validation de locationValidity
-function validate() {
+function validate(e) {
   if(firstNameValidity() && lastNameValidity() && emailValidity() && birthDateValidity()  && cguValidity()) {
+      e.preventDefault();
       resetFields();   
-  }
+      launchThanksMessage();
+    }
 }

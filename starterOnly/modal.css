@@ -139,6 +139,31 @@ main {
 
 /* Modal form */
 
+#thanks {
+  width:100%;
+  height:90vh;
+}
+
+#thanks span {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width:72%;
+  height:90%;
+  margin:0 auto;
+  font-size: 40px;
+  font-weight: 300;
+  text-align: center;
+
+}
+
+#thanks > input{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin:0 auto;
+}
+
 .button {
   background: #fe142f;
   margin-top: 0.5em;
