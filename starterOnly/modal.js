@@ -59,19 +59,20 @@ function launchThanksMessage() {
 
 //clear fields
 function resetFields() {
-  firstName.value = "";
-  lastName.value = "";
-  email.value = "";
-  birthDate.value = "";
-  quantity.value = "";
-  location1.checked = true;
-  location2.checked = false;
-  location3.checked = false;
-  location4.checked = false;
-  location5.checked = false;
-  location6.checked = false;
-  checkbox1.checked = false;
-  checkbox2.checked = false;
+  document.querySelector("form").reset();
+  // firstName.value = "";
+  // lastName.value = "";
+  // email.value = "";
+  // birthDate.value = "";
+  // quantity.value = "";
+  // location1.checked = true;
+  // location2.checked = false;
+  // location3.checked = false;
+  // location4.checked = false;
+  // location5.checked = false;
+  // location6.checked = false;
+  // checkbox1.checked = false;
+  // checkbox2.checked = false;
 };
 
 // close modal form
@@ -82,6 +83,8 @@ function closeModal() {
 // close thanks message
 function closeBtn() {
   modalbg.style.display = "none";
+  window.location.reload();
+
 
 }
 
@@ -195,9 +198,12 @@ quantity.addEventListener('change', quantityValidity)
     }
   };
 
+//LOCATION
+//  let locationValidity = () => {
+//   return true;
+//  } 
 
-// location
-locations.forEach((location) => {
+  locations.forEach((location) => {
   location.addEventListener('change', function() {
     let checked=false;
 
@@ -206,7 +212,9 @@ locations.forEach((location) => {
         checked = true;
         this.classList.add('valid');
         this.classList.remove('invalid');
-        // locationError.innerText = 'true';
+        // locationValidity = () => {
+        //   return true;
+        // }
       }
     })
 
@@ -214,15 +222,15 @@ locations.forEach((location) => {
       this.classList.add('invalid');
       this.classList.remove('valid');
       locationError.innerText = 'Vous devez choisir une ville';
-
+      // locationValidity = () => {
+      //   return false;
+      // }
     }
     return checked;
   });
 });
 
-
 //conditions utilisation
-
 cgu.addEventListener('change', cguValidity)
 
 function cguValidity() {
@@ -242,15 +250,12 @@ function cguValidity() {
   return checked;
 }
 
-
-
-// form validate si tous les champs sont valides alors ca submit sinon ca reste
-
-// on enleve la validation de locationValidity
+// FORM VALIDATION
+// manque la validation de locationValidity
 function validate(e) {
-  if(firstNameValidity() && lastNameValidity() && emailValidity() && birthDateValidity()  && cguValidity()) {
-      e.preventDefault();
-      resetFields();   
-      launchThanksMessage();
-    }
+  if(firstNameValidity() && lastNameValidity() && emailValidity() && birthDateValidity() && cguValidity()) {
+    // e.preventDefault();
+    resetFields();   
+    launchThanksMessage();
+  }
 }
