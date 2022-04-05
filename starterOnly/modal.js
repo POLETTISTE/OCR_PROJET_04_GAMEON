@@ -60,37 +60,30 @@ function launchThanksMessage() {
 //clear fields
 function resetFields() {
   document.querySelector("form").reset();
-  // firstName.value = "";
-  // lastName.value = "";
-  // email.value = "";
-  // birthDate.value = "";
-  // quantity.value = "";
-  // location1.checked = true;
-  // location2.checked = false;
-  // location3.checked = false;
-  // location4.checked = false;
-  // location5.checked = false;
-  // location6.checked = false;
-  // checkbox1.checked = false;
-  // checkbox2.checked = false;
+  document.getElementById("first").classList.remove('valid');
+  document.getElementById("last").classList.remove('valid');
+  document.getElementById("email").classList.remove('valid');
+  document.getElementById("birthdate").classList.remove('valid');
+  document.getElementById("quantity").classList.remove('valid');
 };
 
 // close modal form
 function closeModal() {
   modalbg.style.display = "none";
+  thanks.style.display = "none";
+  reserve.style.display = "block";
 };
 
 // close thanks message
 function closeBtn() {
   modalbg.style.display = "none";
-  window.location.reload();
-
-
+  thanks.style.display = "none";
+  reserve.style.display = "block";
+  // window.location.reload();
 }
 
 
 // firstName Validation
-
 firstName.addEventListener('change',firstNameValidity);
 
 function firstNameValidity() {
@@ -199,52 +192,33 @@ quantity.addEventListener('change', quantityValidity)
   };
 
 //LOCATION
-//  let locationValidity = () => {
-//   return true;
-//  } 
 
-  locations.forEach((location) => {
-  location.addEventListener('change', function() {
+
+function locationValidity(){
+
     let checked=false;
-
     document.querySelectorAll('input[name=location]').forEach((location) => {
       if (location.checked) {
         checked = true;
-        this.classList.add('valid');
-        this.classList.remove('invalid');
-        // locationValidity = () => {
-        //   return true;
-        // }
       }
     })
 
     if (!checked) {
-      this.classList.add('invalid');
-      this.classList.remove('valid');
       locationError.innerText = 'Vous devez choisir une ville';
-      // locationValidity = () => {
-      //   return false;
-      // }
     }
     return checked;
-  });
-});
+  }
 
 //conditions utilisation
 cgu.addEventListener('change', cguValidity)
 
 function cguValidity() {
   let checked=false;
-  let target = document.getElementById('checkbox1');
   if (cgu.checked) {
     checked = true;
-    target.classList.add('valid');
-    target.classList.remove('invalid');
     cguError.innerText = '';
   }else{
     checked=false;
-    target.classList.add('invalid');
-    target.classList.remove('valid');
     cguError.innerText = 'Vous devez vérifier que vous acceptez les termes et conditions.';
   }
   return checked;
@@ -253,8 +227,8 @@ function cguValidity() {
 // FORM VALIDATION
 // manque la validation de locationValidity
 function validate(e) {
-  if(firstNameValidity() && lastNameValidity() && emailValidity() && birthDateValidity() && cguValidity()) {
-    // e.preventDefault();
+  e.preventDefault();
+  if(firstNameValidity() && lastNameValidity() && emailValidity() && birthDateValidity() && locationValidity() && cguValidity()) {
     resetFields();   
     launchThanksMessage();
   }
