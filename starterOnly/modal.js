@@ -7,7 +7,9 @@ function editNav() {
   }
 }
 
-// DOM Elements
+// DOM ELEMENTS
+
+// API allowing programs to read and manipulate page content, structure and styles
 const modalbg = document.querySelector(".bground");
 const modalBtn = document.querySelectorAll(".modal-btn");
 const reserve = document.getElementById("reserve");
@@ -25,7 +27,7 @@ const locations = document.querySelectorAll('input[name=location]');
 const cgu = document.getElementById("checkbox1");
 const checkbox2 = document.getElementById("checkbox2");
 
-//ERRORS
+// DOM ELEMENTS ERRORS
 const firstNameError = document.getElementById("data-first");
 const lastNameError = document.getElementById("data-last");
 const emailError = document.getElementById("data-email");
@@ -34,30 +36,56 @@ const quantityError = document.getElementById("data-quantity");
 const locationError = document.getElementById("data-location");
 const cguError = document.getElementById('data-checkbox1');
 
-//REGEX
+// REGEX
+// Verify if email and birthdate are written in the right way
+
 const emailRegex = /[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}/;
 const birthDateRegex = /^[0-9]{4}\-(0[1-9]|1[012])\-(0[1-9]|[12][0-9]|3[01])/;
 
-// LAUNCH MODAL EVENTS
+//  MODAL EVENTS
+
+// Launch Modal Form
 modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
+
+// Close Modal Form
 modalClose.forEach((span) => span.addEventListener("click", closeModal));
+
+// Button close after message "Merci pour votre inscription"
 btnClose.forEach((span) => span.addEventListener("click", closeBtn));
+
+// Button submit form - verify if all fiels are corrects and validate
 formValidate.forEach((btn) => btn.addEventListener("click", validate));
 
 
-// launch modal form
+// FUNCTIONS
+
+// Launch Modal Form
 function launchModal() {
   modalbg.style.display = "block";
   thanks.style.display = "none";
 };
 
-// launch thanks message
+// Close Modal Form
+function closeModal() {
+  modalbg.style.display = "none";
+  thanks.style.display = "none";
+  reserve.style.display = "block";
+};
+
+// Launch Thanks Message
 function launchThanksMessage() {
   reserve.style.display = "none";
   thanks.style.display = "block";
 };
 
-//clear fields
+// Close Thanks Message
+function closeBtn() {
+  modalbg.style.display = "none";
+  thanks.style.display = "none";
+  reserve.style.display = "block";
+}
+
+//Clear Fields after Validate
 function resetFields() {
   document.querySelector("form").reset();
   document.getElementById("first").classList.remove('valid');
@@ -67,36 +95,31 @@ function resetFields() {
   document.getElementById("quantity").classList.remove('valid');
 };
 
-// close modal form
-function closeModal() {
-  modalbg.style.display = "none";
-  thanks.style.display = "none";
-  reserve.style.display = "block";
-};
 
-// close thanks message
-function closeBtn() {
-  modalbg.style.display = "none";
-  thanks.style.display = "none";
-  reserve.style.display = "block";
-  // window.location.reload();
-}
 
+// FORM FIELDS VALIDATION
 
 // firstName Validation
+// Listening on the DOM elements line 21 and call the function line 106 when form field change
 firstName.addEventListener('change',firstNameValidity);
 
 function firstNameValidity() {
+  //we define empty variable message 
   let message="";
+  // we want to access to the value of the Dom element firstName
   let target = document.getElementById('first');
+  // we assign this value to the variable target
   let value = target.value;
+  // we code conditions if/else to verify validity is true or false
   if (value==="" || value.length < 2){
     message = value === "" ? 'champ obligatoire' : 'Veuillez entrer 2 caractères ou plus pour le champ du prénom';
+    //add class invalid to display css and error message - This field returns false
     target.classList.add('invalid');
     target.classList.remove('valid');
     firstNameError.innerText = message;
     return false;
   } else {
+    // remove class invalid and add class valid - This field returns true
     target.classList.remove('invalid');
     target.classList.add('valid');
     firstNameError.innerText = message;
@@ -126,13 +149,14 @@ function lastNameValidity() {
 };
 
 
-//  email validation
+//  email Validation
 email.addEventListener('change',emailValidity );
 
 function emailValidity() {
   let message = "";
   let target = document.getElementById('email');
   let value = target.value;
+  // We verify is the mail has the correct format thanks to the regex
   if (value==="" || !(emailRegex.test(value))){
     message = value === "" ? 'champ obligatoire' : 'mauvais format de mail';
     target.classList.add('invalid');
@@ -148,13 +172,14 @@ function emailValidity() {
 };
 
 
-//  birthdate validation
+//  birthdate Validation
 birthDate.addEventListener('change',birthDateValidity );
 
 function birthDateValidity() {
   let message = "";
   let target = document.getElementById('birthdate');
   let value = target.value;
+    // We verify is the birthdate has the correct format thanks to the regex
   if (value==="" || !(birthDateRegex.test(value))){
     message = value === "" ? 'champ obligatoire' : 'Vous devez entrer votre date de naissance.';
     target.classList.add('invalid');
@@ -170,7 +195,7 @@ function birthDateValidity() {
 };
 
 
-// quantity validation
+// quantity Validation
 quantity.addEventListener('change', quantityValidity)
 
   function quantityValidity() {
@@ -191,9 +216,7 @@ quantity.addEventListener('change', quantityValidity)
     }
   };
 
-//LOCATION
-
-
+//location Validation
 function locationValidity(){
 
     let checked=false;
@@ -209,7 +232,7 @@ function locationValidity(){
     return checked;
   }
 
-//conditions utilisation
+//conditions Validation
 cgu.addEventListener('change', cguValidity)
 
 function cguValidity() {
@@ -225,7 +248,10 @@ function cguValidity() {
 }
 
 // FORM VALIDATION
-// manque la validation de locationValidity
+
+//if all fields are true, it validates the form.
+//fields are reseted
+//function launchThanks Message line 75 is called
 function validate(e) {
   e.preventDefault();
   if(firstNameValidity() && lastNameValidity() && emailValidity() && birthDateValidity() && locationValidity() && cguValidity()) {
