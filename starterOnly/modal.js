@@ -173,6 +173,9 @@ function emailValidity() {
 
 
 //  birthdate Validation
+//calcul age more than 3 years
+const getAge = birthDate => Math.floor((new Date().getTime() - new Date(birthDate).getTime()) / 3.15576e+10)
+
 birthDate.addEventListener('change',birthDateValidity );
 
 function birthDateValidity() {
@@ -186,7 +189,13 @@ function birthDateValidity() {
     target.classList.remove('valid');
     birthDateError.innerText = message;
      return false;
-  } else {
+  }else if (getAge(document.getElementById('birthdate').value) < "3") {
+    message = "Vous devez avoir plus de 3 ans";
+    target.classList.add('invalid');
+    target.classList.remove('valid');
+    birthDateError.innerText = message;
+    return false;
+  }else {
     target.classList.remove('invalid');
     target.classList.add('valid');
     birthDateError.innerText = message;
